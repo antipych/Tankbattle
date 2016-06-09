@@ -4,7 +4,8 @@ using System;
 
 public class Tank : MonoBehaviour
 {
-    public int Speed = 4;
+    public float MoveSpeed = 1f;
+    public float TurnSpeed = 90f;
 
     public GameObject shell;
     public Transform  shotSpawn;
@@ -20,8 +21,8 @@ public class Tank : MonoBehaviour
     {
         up,
         down,
-        left,
-        right
+        rLeft,
+        rRight
     }
 
     // Use this for initialization
@@ -34,22 +35,36 @@ public class Tank : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float moveV = Input.GetAxis("Vertical");
-        float moveH = Input.GetAxis("Horizontal");
+        float move = Input.GetAxis("Vertical");
+        float rotate = Input.GetAxis("Horizontal");
 
-        if (Mathf.Abs(moveV) > 0.1f || Mathf.Abs(moveH) > 0.1f)
+        if (Mathf.Abs(rotate) > 0.1f)
         {
+            // TODO: другая анимация
             anim.SetBool("Move", true);
 
-            if (Mathf.Abs(moveV) > 0.1f)
+            if (rotate > 0)
             {
-                rig.velocity = new Vector2(0, moveV * Speed);
-                Rotate(moveV > 0 ? Direction.up : Direction.down);
+                transform.Rotate(Vector3.forward, -TurnSpeed * Time.deltaTime);
             }
             else
             {
-                rig.velocity = new Vector2(moveH * Speed, 0);
-                Rotate(moveH > 0 ? Direction.right : Direction.left);
+                transform.Rotate(Vector3.forward, TurnSpeed * Time.deltaTime);
+            }
+        }
+
+
+        if (Mathf.Abs(move) > 0.1f)
+        {
+            anim.SetBool("Move", true);
+
+            if (move > 0)
+            {
+                transform.Translate(Vector3.up * MoveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Vector3.down * MoveSpeed * Time.deltaTime);
             }
         }
         else
@@ -63,30 +78,5 @@ public class Tank : MonoBehaviour
             nextFire = Time.time + fireRate;
             Instantiate(shell, shotSpawn.position, shotSpawn.rotation);
         }
-    }
-
-    private void Rotate(Direction d)
-    {
-        var curEulerAngles = transform.eulerAngles;
-        Vector3 newEulerAngles;
-
-        switch (d)
-        {
-            case Direction.down:
-                newEulerAngles = new Vector3(0.0f, 0.0f, 180.0f);
-                break;
-            case Direction.left:
-                newEulerAngles = new Vector3(0.0f, 0.0f, 90.0f);
-                break;
-            case Direction.right:
-                newEulerAngles = new Vector3(0.0f, 0.0f, -90.0f);
-                break;
-            default:
-                newEulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
-                break;
-        }
-
-        if (curEulerAngles != newEulerAngles)
-            transform.eulerAngles = newEulerAngles;
     }
 }
