@@ -76,7 +76,19 @@ public class Tank : MonoBehaviour
         if (Time.time > nextFire && Input.GetAxis("Fire1") > 0)
         {
             nextFire = Time.time + fireRate;
-            Instantiate(shell, shotSpawn.position, shotSpawn.rotation);
+            var q= Instantiate(shell, shotSpawn.position, shotSpawn.rotation) as GameObject;
+            q.tag = "TankShell";
+        }
+    }
+
+    //Called when the Trigger entered
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        //Excute if the object tag was equal to one of these
+        if (other.tag == "EnemyShell")
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 }
