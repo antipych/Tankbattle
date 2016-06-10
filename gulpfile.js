@@ -17,7 +17,11 @@ gulp.task('tilemap32', function () {
 		paths.sprites32 + 'tower_canon.png',
         paths.sprites32 + 'area.png',
         paths.sprites32 + 'bush_small.png',
-        paths.sprites32 + 'bush_small_smashed.png'
+        paths.sprites32 + 'bush_small_smashed.png',
+        paths.sprites32 + 'block.png',
+        paths.sprites32 + 'grass.png',
+        paths.sprites32 + 'rocks_small.png',
+        paths.sprites32 + 'stonebig.png'
 		])
         .pipe(spritesmith({
 		imgName: 'tilemap32.png',
