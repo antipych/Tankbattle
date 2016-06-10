@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Shell : MonoBehaviour {
 
-    public float Speed = 10; //Speed of the velocity
+    public float Speed = 5; //Speed of the velocity
 
     // Use this for initialization
     void Start () {
