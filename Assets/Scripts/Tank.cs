@@ -1,14 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class Tank : MonoBehaviour
 {
     public float MoveSpeed = 1f;
     public float TurnSpeed = 90f;
 
+    float Health = 3f;
+
+    public float Lives = 5f;
+    public Text  LivesText;
+    public Text GameResult;
+
     public GameObject shell;
     public Transform  shotSpawn;
+    public GameObject Wreck;
+
     public float fireRate = 1F;	//Fire Rate between Shots
     private float nextFire = 0.0F;	//First fire & Next fire Time
 
@@ -16,6 +25,15 @@ public class Tank : MonoBehaviour
 
     //ссылка на компонент анимаций
     private Animator anim;
+
+    private Vector3 start;
+    private Quaternion startRotation;
+
+    public float heading;
+
+    public bool isInDock { get {
+            return heading < 1;
+    } }
 
     public enum Direction
     {
@@ -28,8 +46,13 @@ public class Tank : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        start = transform.position;
+        startRotation = transform.rotation;
+
         rig  = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        SetTexts();
     }
 
     // Update is called once per frame
@@ -73,12 +96,14 @@ public class Tank : MonoBehaviour
             rig.velocity = Vector2.zero;
         }
 
-        if (Time.time > nextFire && Input.GetAxis("Fire1") > 0)
+        if (Time.time > nextFire && Input.GetAxis("Fire1") > 0 && !isInDock)
         {
             nextFire = Time.time + fireRate;
             var q= Instantiate(shell, shotSpawn.position, shotSpawn.rotation) as GameObject;
             q.tag = "TankShell";
         }
+
+        heading = (start - transform.position).magnitude;
     }
 
     //Called when the Trigger entered
@@ -87,8 +112,37 @@ public class Tank : MonoBehaviour
         //Excute if the object tag was equal to one of these
         if (other.tag == "EnemyShell")
         {
+            var shell = other.gameObject.GetComponent<Shell>();
+            Health -= shell.Power;
+
             Destroy(other.gameObject);
-            Destroy(gameObject);
+
+            if (Health < 0)
+            {
+                Respawn();
+            }
         }
+    }
+
+    private void Respawn()
+    {
+        --Lives;
+        var q = Instantiate(Wreck, transform.position, transform.rotation) as GameObject;
+        q.transform.parent = gameObject.transform.parent;
+
+        transform.position = start;
+        transform.rotation = startRotation;
+
+        Health = 3f;
+
+        SetTexts();
+        //if()
+    }
+
+    void SetTexts()
+    {
+        if (LivesText == null)
+            return;
+        LivesText.text = "Lives: " + Lives.ToString();
     }
 }

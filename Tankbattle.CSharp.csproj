@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{55255052-E0E5-4895-55EC-4A66C2AD2A93}</ProjectGuid>
+    <ProjectGuid>{E7326756-370A-90D9-0B0B-36C4F1BE7CBA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.3.5f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -60,49 +58,17 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Boundary.cs" />
+    <Compile Include="Assets\Scripts\BushSmall.cs" />
     <Compile Include="Assets\Scripts\Cannon.cs" />
     <Compile Include="Assets\Scripts\Shell.cs" />
     <Compile Include="Assets\Scripts\Tank.cs" />
     <Compile Include="Assets\Scripts\Wall.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Docs\GameObjects.txt" />
-    <Content Include="gulpfile.js" />
-    <Content Include="TileMapSource\src\Sprites\32x32\area.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\block.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\bullet.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\bush_small.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\bush_small_smashed.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\fuel.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\gem.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\grass.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\hole.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\pit.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\player.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\player_position2.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\rocks_small.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\stonebig.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\tower_base.png" />
-    <Content Include="TileMapSource\src\Sprites\32x32\tower_canon.png" />
-    <Content Include="TileMapSource\src\Sprites\64x64\bunker.png" />
-    <Content Include="TileMapSource\src\Sprites\64x64\bush_big.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="package.json" />
-    <None Include="README.md" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0ebc41415b8e0f74ca1c67f8988abc25
-timeCreated: 1465564024
+timeCreated: 1465583023
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -16,6 +16,7 @@ TextureImporter:
     21300018: tilemap32_9
     21300020: tilemap32_10
     21300022: tilemap32_11
+    21300024: tilemap32_12
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -207,6 +208,21 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 352
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -16, y: 16}
+        - {x: -16, y: -16}
+        - {x: 16, y: -16}
+        - {x: 16, y: 16}
+    - name: tilemap32_12
+      rect:
+        serializedVersion: 2
+        x: 384
         y: 0
         width: 32
         height: 32

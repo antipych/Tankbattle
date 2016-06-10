@@ -3,7 +3,8 @@ using System.Collections;
 
 public class Cannon : MonoBehaviour {
 
-    public GameObject target;
+    public Tank target;
+    public GameObject Wreck;
 
     public GameObject shell;
     public Transform shotSpawn;
@@ -21,7 +22,7 @@ public class Cannon : MonoBehaviour {
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
-        if (Time.time > nextFire)
+        if (Time.time > nextFire && target.heading > 1 )
         {
             nextFire = Time.time + fireRate;
             var c = Instantiate(shell, shotSpawn.position, shotSpawn.rotation) as GameObject;
@@ -36,6 +37,10 @@ public class Cannon : MonoBehaviour {
         if (other.tag == "TankShell")
         {
             Destroy(other.gameObject);
+
+            var q = Instantiate(Wreck, transform.position, transform.rotation) as GameObject;
+            q.transform.parent = gameObject.transform.parent;
+
             Destroy(gameObject);
         }
     }
