@@ -4,16 +4,20 @@ var gulp = require('gulp'),
 
 var paths = {
     webroot: "./TileMapSource/build/",
-    src: "./TileMapSource/src/"
+    src: "./TileMapSource/src/",
+    sprites32: "./TileMapSource/src/Sprites/32x32/",
 };
 
 gulp.task('tilemap32', function () {
 	var spriteData = gulp.src([
-		paths.src + 'Sprites/32x32/player.png',
-		paths.src + 'Sprites/32x32/player_position2.png',
-		paths.src + 'Sprites/32x32/bullet.png',
-		paths.src + 'Sprites/32x32/tower_base.png',
-		paths.src + 'Sprites/32x32/tower_canon.png',
+		paths.sprites32 + 'player.png',
+		paths.sprites32 + 'player_position2.png',
+		paths.sprites32 + 'bullet.png',
+		paths.sprites32 + 'tower_base.png',
+		paths.sprites32 + 'tower_canon.png',
+        paths.sprites32 + 'area.png',
+        paths.sprites32 + 'bush_small.png',
+        paths.sprites32 + 'bush_small_smashed.png'
 		])
         .pipe(spritesmith({
 		imgName: 'tilemap32.png',
