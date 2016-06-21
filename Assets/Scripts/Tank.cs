@@ -27,6 +27,7 @@ public class Tank : MonoBehaviour
     private Animator anim;
 
     private Vector3 start;
+    private Vector3 PitVector;
     private Quaternion startRotation;
 
     public float heading;
@@ -121,13 +122,17 @@ public class Tank : MonoBehaviour
             {
                 Respawn();
             }
+
+            SetTexts();
         }
     }
 
     private void Respawn()
     {
         --Lives;
-        var q = Instantiate(Wreck, transform.position, transform.rotation) as GameObject;
+        PitVector = transform.position;
+        PitVector.z = 1;
+        var q = Instantiate(Wreck, PitVector, transform.rotation) as GameObject;
         q.transform.parent = gameObject.transform.parent;
 
         transform.position = start;
@@ -143,6 +148,6 @@ public class Tank : MonoBehaviour
     {
         if (LivesText == null)
             return;
-        LivesText.text = "Lives: " + Lives.ToString();
+        LivesText.text = "Lives: " + Lives.ToString()+ "  Health: "+ (33*Health+1).ToString()+"%";
     }
 }

@@ -5,6 +5,7 @@ public class Cannon : MonoBehaviour {
 
     public Tank target;
     public GameObject Wreck;
+    private Vector3 PitVector;
 
     public GameObject shell;
     public Transform shotSpawn;
@@ -38,7 +39,9 @@ public class Cannon : MonoBehaviour {
         {
             Destroy(other.gameObject);
 
-            var q = Instantiate(Wreck, transform.position, transform.rotation) as GameObject;
+            PitVector = transform.position;
+            PitVector.z = 1;
+            var q = Instantiate(Wreck, PitVector, transform.rotation) as GameObject;
             q.transform.parent = gameObject.transform.parent;
 
             Destroy(gameObject);
