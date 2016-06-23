@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E7326756-370A-90D9-0B0B-36C4F1BE7CBA}</ProjectGuid>
+    <ProjectGuid>{55255052-E0E5-4895-55EC-4A66C2AD2A93}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -66,6 +66,9 @@
     <Compile Include="Assets\Scripts\Boundary.cs" />
     <Compile Include="Assets\Scripts\BushSmall.cs" />
     <Compile Include="Assets\Scripts\Cannon.cs" />
+    <Compile Include="Assets\Scripts\Fuel.cs" />
+    <Compile Include="Assets\Scripts\Gem.cs" />
+    <Compile Include="Assets\Scripts\GemFree.cs" />
     <Compile Include="Assets\Scripts\Shell.cs" />
     <Compile Include="Assets\Scripts\Tank.cs" />
     <Compile Include="Assets\Scripts\Wall.cs" />

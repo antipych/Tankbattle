@@ -9,6 +9,9 @@ public class Tank : MonoBehaviour
     public float TurnSpeed = 90f;
 
     float Health = 3f;
+    public float Fuel = 100f;
+    public float Scores = 0f;
+    public bool isGem = false;
 
     public float Lives = 5f;
     public Text  LivesText;
@@ -17,6 +20,7 @@ public class Tank : MonoBehaviour
     public GameObject shell;
     public Transform  shotSpawn;
     public GameObject Wreck;
+    public GameObject FreeGem;
 
     public float fireRate = 1F;	//Fire Rate between Shots
     private float nextFire = 0.0F;	//First fire & Next fire Time
@@ -81,6 +85,12 @@ public class Tank : MonoBehaviour
         if (Mathf.Abs(move) > 0.1f)
         {
             anim.SetBool("Move", true);
+            Fuel= Fuel - MoveSpeed * Time.deltaTime;
+            SetTexts();
+            if (Fuel <= 0)
+            {
+                Respawn();
+            }
 
             if (move > 0)
             {
@@ -105,6 +115,15 @@ public class Tank : MonoBehaviour
         }
 
         heading = (start - transform.position).magnitude;
+
+        if (heading<1 && isGem)
+        {
+            Debug.Log("You WIN!!!");
+        }
+        else
+        {
+            Debug.Log("");
+        }
     }
 
     //Called when the Trigger entered
@@ -125,11 +144,34 @@ public class Tank : MonoBehaviour
 
             SetTexts();
         }
+
+        if (other.tag == "GemFree")
+        {
+            isGem=true;
+
+            Destroy(other.gameObject);
+
+            Scores += 100;
+
+            SetTexts();
+        }
     }
 
     private void Respawn()
     {
         --Lives;
+        PitVector = transform.position;
+
+        if (isGem==true) {
+
+            isGem = false;
+            
+            PitVector.z = 0;
+            var EmptyGem = Instantiate(FreeGem, PitVector, transform.rotation) as GameObject;
+            //EmptyGem.transform.parent = gameObject.transform.parent;
+            //EmptyGem.tag = "FreeGem";
+
+        }
         PitVector = transform.position;
         PitVector.z = 1;
         var q = Instantiate(Wreck, PitVector, transform.rotation) as GameObject;
@@ -139,6 +181,7 @@ public class Tank : MonoBehaviour
         transform.rotation = startRotation;
 
         Health = 3f;
+        Fuel = 100f;
 
         SetTexts();
         //if()
@@ -146,8 +189,15 @@ public class Tank : MonoBehaviour
 
     void SetTexts()
     {
+        string GemText = "False";
+        if (isGem == true)
+        { GemText= "True"; }
+
         if (LivesText == null)
             return;
-        LivesText.text = "Lives: " + Lives.ToString()+ "  Health: "+ (33*Health+1).ToString()+"%";
+        LivesText.text = "Lives: " + Lives.ToString()+ "  Health: "+ (33*Health+1).ToString()+"%" +
+            "  Fuel: " + Fuel.ToString("F00") + "  Scores: " + Scores.ToString("F00")+" Gem:"+GemText;
+
+        //Debug.Log(isGem);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Wall : MonoBehaviour {
+public class Fuel : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -17,10 +17,11 @@ public class Wall : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         //Excute if the object tag was equal to one of these
-        if (other.tag == "TankShell" || other.tag == "EnemyShell")
+        if (other.tag != "TankShell" && other.tag != "EnemyShell")
         {
-            Destroy(other.gameObject);
-            Destroy(this.gameObject);
+            GameObject.Find("Tank").GetComponent<Tank>().Fuel = 100;
+            Destroy(gameObject);
+
         }
     }
 }

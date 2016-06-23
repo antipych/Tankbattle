@@ -14,7 +14,7 @@ public class Cannon : MonoBehaviour {
     
     // Use this for initialization
     void Start () {
-        nextFire = Time.time + fireRate;
+        nextFire = Time.time+ Random.Range(0, fireRate) + fireRate;
     }
 	
 	// Update is called once per frame
@@ -35,7 +35,7 @@ public class Cannon : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         //Excute if the object tag was equal to one of these
-        if (other.tag == "TankShell")
+        if (other.tag == "TankShell" )
         {
             Destroy(other.gameObject);
 
@@ -45,6 +45,8 @@ public class Cannon : MonoBehaviour {
             q.transform.parent = gameObject.transform.parent;
 
             Destroy(gameObject);
+
+            GameObject.Find("Tank").GetComponent<Tank>().Scores += 100;
         }
     }
 }
