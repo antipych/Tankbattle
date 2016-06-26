@@ -122,7 +122,7 @@ public class Tank : MonoBehaviour
         }
         else
         {
-            Debug.Log("");
+            //Debug.Log("");
         }
     }
 
@@ -195,8 +195,8 @@ public class Tank : MonoBehaviour
 
         if (LivesText == null)
             return;
-        LivesText.text = "Lives: " + Lives.ToString()+ "  Health: "+ (33*Health+1).ToString()+"%" +
-            "  Fuel: " + Fuel.ToString("F00") + "  Scores: " + Scores.ToString("F00")+" Gem:"+GemText;
+        LivesText.text = "Lives: " + Lives.ToString() + "  Health: " + (33 * Health + 1).ToString() + "%" +
+            "  Fuel: " + Fuel.ToString("F00") + "  Scores: " + Scores.ToString("F00"); // +" Gem:"+GemText;
 
         //Debug.Log(isGem);
     }
