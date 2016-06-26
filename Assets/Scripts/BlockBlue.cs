@@ -5,7 +5,7 @@ public class BlockBlue : MonoBehaviour {
 
     //объявить список наших картинок
     public Sprite[] img;
-    bool CurrentState = true;
+    public bool CurrentState = true;
 
     // Use this for initialization
     void Start () {
@@ -14,6 +14,8 @@ public class BlockBlue : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
         if (CurrentState)
         {
             this.GetComponent<SpriteRenderer>().sprite = img[0];
@@ -22,7 +24,7 @@ public class BlockBlue : MonoBehaviour {
         {
             this.GetComponent<SpriteRenderer>().sprite = img[1];
         }
-        this.GetComponent<BoxCollider2D>().enabled = CurrentState;
+        this.GetComponent<BoxCollider2D>().isTrigger = !CurrentState;
     }
 
     //Called when the Trigger entered
@@ -37,27 +39,20 @@ public class BlockBlue : MonoBehaviour {
 
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-
+    void OnTriggerExit2D(Collider2D other)
+    {   
         CurrentState = true;
+    }
+    void OnCollisionStay2D(Collision2D Col)
+    {
         //Excute if the object tag was not equal to one of these
-        if (other.tag != "TankShell" && other.tag != "EnemyShell")
+        if (Col.gameObject.tag != "TankShell" && Col.gameObject.tag != "EnemyShell")
         {
             CurrentState = false;
         }
 
     }
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        //Why it's not working????????????
-        CurrentState = true;
-    }
 
-    void OnCollisionExit2D(Collider2D other)
-    {
-        //Why it's not working????????????
-        CurrentState = true;
-    }
+
 }

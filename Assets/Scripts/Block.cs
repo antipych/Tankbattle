@@ -40,7 +40,11 @@ public class Block : MonoBehaviour {
         //Excute if the object tag was equal to one of these
         if (other.tag == "TankShell" || other.tag == "EnemyShell")
         {
-            if (CurrentState) { Destroy(other.gameObject); }
+            if (CurrentState)
+            {
+                Destroy(other.gameObject);
+
+            }
                 
         }
     }

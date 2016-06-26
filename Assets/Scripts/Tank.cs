@@ -189,9 +189,9 @@ public class Tank : MonoBehaviour
 
     void SetTexts()
     {
-        string GemText = "False";
-        if (isGem == true)
-        { GemText= "True"; }
+        //string GemText = "False";
+        //if (isGem == true)
+        //{ GemText= "True"; }
 
         if (LivesText == null)
             return;
