@@ -3,8 +3,9 @@ using System.Collections;
 
 public class Wall : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    public GameObject Crater;
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -21,6 +22,8 @@ public class Wall : MonoBehaviour {
         {
             Destroy(other.gameObject);
             Destroy(this.gameObject);
+            Vector3 PitVector = transform.position;
+            var newCrater = Instantiate(Crater, PitVector, transform.rotation) as GameObject;
         }
     }
 }

@@ -6,6 +6,7 @@ public class BlockBlue : MonoBehaviour {
     //объявить список наших картинок
     public Sprite[] img;
     public bool CurrentState = true;
+    public GameObject Crater;
 
     // Use this for initialization
     void Start () {
@@ -33,7 +34,12 @@ public class BlockBlue : MonoBehaviour {
         //Excute if the object tag was equal to one of these
         if (other.tag == "TankShell" || other.tag == "EnemyShell")
         {
-            if (CurrentState) { Destroy(other.gameObject); }
+            if (CurrentState)
+            {
+                Destroy(other.gameObject);
+                Vector3 PitVector = transform.position;
+                var newCrater = Instantiate(Crater, PitVector, transform.rotation) as GameObject;
+            }
 
         }
 

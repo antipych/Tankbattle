@@ -6,6 +6,7 @@ public class Block : MonoBehaviour {
     public float changestateRate = 5F;     //Fire Rate between changestate
     private float nextChangeState = 0.0F;	//First changestate & Next changestate Time
     private bool CurrentState = true;
+    public GameObject Crater;
 
     //объявить список наших картинок
     public Sprite[] img;
@@ -43,6 +44,8 @@ public class Block : MonoBehaviour {
             if (CurrentState)
             {
                 Destroy(other.gameObject);
+                Vector3 PitVector = transform.position;
+                var newCrater = Instantiate(Crater, PitVector, transform.rotation) as GameObject;
 
             }
                 
