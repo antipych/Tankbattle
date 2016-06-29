@@ -8,57 +8,45 @@ public class BlockBlue : MonoBehaviour {
     public bool CurrentState = true;
     public GameObject Crater;
 
+    private BoxCollider2D theColl;
+    private SpriteRenderer theSprite;
+
     // Use this for initialization
     void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-
-        if (CurrentState)
-        {
-            this.GetComponent<SpriteRenderer>().sprite = img[0];
-        }
-        else
-        {
-            this.GetComponent<SpriteRenderer>().sprite = img[1];
-        }
-        this.GetComponent<BoxCollider2D>().isTrigger = !CurrentState;
+        theColl = GetComponent<BoxCollider2D>();
+        theSprite = GetComponent<SpriteRenderer>();
     }
 
     //Called when the Trigger entered
     void OnTriggerEnter2D(Collider2D other)
     {
-        //Excute if the object tag was equal to one of these
-        if (other.tag == "TankShell" || other.tag == "EnemyShell")
-        {
-            if (CurrentState)
-            {
-                Destroy(other.gameObject);
-                Vector3 PitVector = transform.position;
-                var newCrater = Instantiate(Crater, PitVector, transform.rotation) as GameObject;
-            }
-
+        if(!theColl.isTrigger && (other.tag == "TankShell" || other.tag == "EnemyShell"))
+        { 
+            Instantiate(Crater, other.gameObject.transform.position, transform.rotation);
+            Destroy(other.gameObject);
         }
-
     }
 
     void OnTriggerExit2D(Collider2D other)
     {   
         CurrentState = true;
     }
-    void OnCollisionStay2D(Collision2D Col)
-    {
-        //Excute if the object tag was not equal to one of these
-        if (Col.gameObject.tag != "TankShell" && Col.gameObject.tag != "EnemyShell")
-        {
-            CurrentState = false;
-        }
 
+    void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.GetComponent<Tank>() != null)
+        {
+            theSprite.sprite = img[1];
+            theColl.isTrigger = true;
+        }
     }
 
-
-
+    void OnCollisionExit2D(Collision2D coll)
+    {
+        if (coll.gameObject.GetComponent<Tank>() != null)
+        {
+            theSprite.sprite = img[0];
+            theColl.isTrigger = false;
+        }
+    }
 }

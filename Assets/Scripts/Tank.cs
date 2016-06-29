@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Tank : MonoBehaviour
 {
@@ -118,7 +119,7 @@ public class Tank : MonoBehaviour
 
         if (heading<1 && isGem)
         {
-            Debug.Log("You WIN!!!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         else
         {

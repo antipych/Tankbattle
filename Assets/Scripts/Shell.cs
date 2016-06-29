@@ -6,6 +6,8 @@ public class Shell : MonoBehaviour {
     public float Speed = 5; //Speed of the velocity
     public float Power = 1;
 
+    public GameObject explosion;
+
     // Use this for initialization
     void Start () {
 	
@@ -16,8 +18,8 @@ public class Shell : MonoBehaviour {
         GetComponent<Rigidbody2D>().velocity = transform.up * Speed; //Give Velocity to the Player ship shot
     }
 
-
-
-
-
+    void OnDestroy()
+    {
+        Instantiate(explosion, gameObject.transform.position, transform.rotation);
+    }
 }

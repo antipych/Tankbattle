@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6ABF5E40-5F43-D099-BD2C-79BA41C24B27}</ProjectGuid>
+    <ProjectGuid>{CCEDB3C7-89BB-DE54-3679-5134293AEBDE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -82,12 +82,6 @@
     <Reference Include="UnityEditor.Graphs">
       <HintPath>Library\UnityAssemblies\UnityEditor.Graphs.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>Library\UnityAssemblies\UnityEditor.Android.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.WebGL.Extensions">
-      <HintPath>Library\UnityAssemblies\UnityEditor.WebGL.Extensions.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>Library\UnityAssemblies\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
@@ -96,9 +90,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="TankBattle.CSharp.csproj">
-      <Project>{55255052-E0E5-4895-55EC-4A66C2AD2A93}</Project>
-      <Name>TankBattle.CSharp</Name>
+    <ProjectReference Include="Tankbattle.CSharp.csproj">
+      <Project>{E7326756-370A-90D9-0B0B-36C4F1BE7CBA}</Project>
+      <Name>Tankbattle.CSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

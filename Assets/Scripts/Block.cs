@@ -43,10 +43,8 @@ public class Block : MonoBehaviour {
         {
             if (CurrentState)
             {
+                Instantiate(Crater, other.gameObject.transform.position, transform.rotation);
                 Destroy(other.gameObject);
-                Vector3 PitVector = transform.position;
-                var newCrater = Instantiate(Crater, PitVector, transform.rotation) as GameObject;
-
             }
                 
         }
