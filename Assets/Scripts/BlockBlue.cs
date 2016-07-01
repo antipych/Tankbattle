@@ -28,8 +28,12 @@ public class BlockBlue : MonoBehaviour {
     }
 
     void OnTriggerExit2D(Collider2D other)
-    {   
-        CurrentState = true;
+    {
+        if (other.gameObject.GetComponent<Tank>() != null)
+        {
+            theSprite.sprite = img[0];
+            theColl.isTrigger = false;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D coll)
@@ -38,15 +42,6 @@ public class BlockBlue : MonoBehaviour {
         {
             theSprite.sprite = img[1];
             theColl.isTrigger = true;
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D coll)
-    {
-        if (coll.gameObject.GetComponent<Tank>() != null)
-        {
-            theSprite.sprite = img[0];
-            theColl.isTrigger = false;
         }
     }
 }
