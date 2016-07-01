@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\GemFree.cs" />
     <Compile Include="Assets\Scripts\Shell.cs" />
     <Compile Include="Assets\Scripts\Tank.cs" />
+    <Compile Include="Assets\Scripts\Tree.cs" />
     <Compile Include="Assets\Scripts\Wall.cs" />
     <Compile Include="Assets\Scripts\explosion.cs" />
   </ItemGroup>
