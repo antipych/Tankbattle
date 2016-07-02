@@ -6,6 +6,7 @@ public class Gem : MonoBehaviour {
     private Vector3 PitVector;
     public GameObject Wreck;
     public GameObject FreeGem;
+    public bool GemInside;
 
     // Use this for initialization
     void Start () {
@@ -25,18 +26,16 @@ public class Gem : MonoBehaviour {
         {
             Destroy(other.gameObject);
 
-            PitVector = transform.position;
-            PitVector.z = 1;
-            var EmptyGem = Instantiate(FreeGem, PitVector, transform.rotation) as GameObject;
-            //EmptyGem.transform.parent = gameObject.transform.parent;
-            //EmptyGem.tag = "GemFree";
+            if (GemInside)
+            {
+                PitVector = transform.position;
+                PitVector.z = 1;
+                var EmptyGem = Instantiate(FreeGem, PitVector, transform.rotation) as GameObject;
+            }
+
             PitVector.z = 2;
             var q = Instantiate(Wreck, PitVector, transform.rotation) as GameObject;
-            //q.transform.parent = gameObject.transform.parent;
-            //CreateEmptyGem
 
-            
-            //q.transform.parent = gameObject.transform.parent;
 
             Destroy(gameObject);
             GameObject.Find("Tank").GetComponent<Tank>().Scores += 100;

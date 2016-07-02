@@ -15,6 +15,7 @@ public class Tank : MonoBehaviour
     public bool isGem = false;
 
     public float Lives = 5f;
+    public float Shells = 10f;
     public Text  LivesText;
     public Text GameResult;
 
@@ -110,20 +111,30 @@ public class Tank : MonoBehaviour
 
         if (Time.time > nextFire && Input.GetAxis("Fire1") > 0 && !isInDock)
         {
-            nextFire = Time.time + fireRate;
-            var q= Instantiate(shell, shotSpawn.position, shotSpawn.rotation) as GameObject;
-            q.tag = "TankShell";
+            if (Shells > 0)
+            {
+                nextFire = Time.time + fireRate;
+                var q = Instantiate(shell, shotSpawn.position, shotSpawn.rotation) as GameObject;
+                q.tag = "TankShell";
+                --Shells;
+                SetTexts();
+            }
         }
 
         heading = (start - transform.position).magnitude;
 
         if (heading<1 && isGem)
         {
+            //TODO Congratulations
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            //TODO Check last scene and start first
         }
-        else
+
+        if (heading<1)
         {
-            //Debug.Log("");
+            Health = 3f;
+            Fuel = 100f;
+            Shells = 10;
         }
     }
 
@@ -138,7 +149,7 @@ public class Tank : MonoBehaviour
 
             Destroy(other.gameObject);
 
-            if (Health < 0)
+            if (Health <= 0)
             {
                 Respawn();
             }
@@ -183,6 +194,7 @@ public class Tank : MonoBehaviour
 
         Health = 3f;
         Fuel = 100f;
+        Shells = 10;
 
         SetTexts();
         //if()
@@ -197,7 +209,9 @@ public class Tank : MonoBehaviour
         if (LivesText == null)
             return;
         LivesText.text = "Lives: " + Lives.ToString() + "  Health: " + (33 * Health + 1).ToString() + "%" +
-            "  Fuel: " + Fuel.ToString("F00") + "  Scores: " + Scores.ToString("F00"); // +" Gem:"+GemText;
+            "  Fuel: " + Fuel.ToString("F00") + 
+            "  Shells: " + Shells.ToString("F00") + 
+            "  Scores: " + Scores.ToString("F00"); // +" Gem:"+GemText;
 
         //Debug.Log(isGem);
     }
