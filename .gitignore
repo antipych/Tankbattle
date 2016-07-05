@@ -244,4 +244,8 @@ ModelManifest.xml
 .fake/
 /Temp
 /Library
-/TileMapSource/src/less
+/Tankbattle.vsext
+
+Tankbattle.CSharp.csproj
+Tankbattle.CSharp.Editor.csproj
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tilemaps>
+	<tilemap name="tilemap32" size="32">
+		<file>32x32\block2.png</file>
+		<file>32x32\player.png</file>
+		<file>32x32\bullet.png</file>
+		<file>32x32\tower_base.png</file>
+		<file>32x32\tower_canon.png</file>
+		<file>32x32\area.png</file>
+		<file>32x32\bush_small.png</file>
+		<file>32x32\bush_small_smashed.png</file>
+		<file>32x32\block.png</file>
+		<file>32x32\grass.png</file>
+		<file>32x32\rocks_small.png</file>
+		<file>32x32\stonebig.png</file>
+		<file>32x32\ball1.png</file>
+		<file>32x32\ball2.png</file>
+		<file>32x32\ball3.png</file>
+		<file>32x32\ball4.png</file>
+		<file>32x32\block_down.png</file>
+		<file>32x32\player_position2.png</file>
+		<file>32x32\block2_down.png</file>
+		<file>32x32\crater.png</file>
+		<file>32x32\dust.png</file>
+		<file>32x32\fuel.png</file>
+		<file>32x32\gem.png</file>
+		<file>32x32\gem_free.png</file>
+		<file>32x32\hole.png</file>
+		<file>32x32\hole_birth.png</file>
+		<file>32x32\pit.png</file>
+		<file>32x32\wall1_horizontal_bottom.png</file>
+		<file>32x32\wall1_left_bottom_corner.png</file>
+		<file>32x32\wall1_left_top_corner.png</file>
+		<file>32x32\wall1_right_bottom_corner.png</file>
+		<file>32x32\wall1_right_top_corner.png</file>
+		<file>32x32\wall1_vertical_left.png</file>
+		<file>32x32\wall1_vertical_right.png</file>
+	</tilemap>
+		<tilemap name="tilemap64" size="64">
+		<file>64x64\BlockBig.png</file>
+		<file>64x64\bunker.png</file>
+		<file>64x64\bunker_opened.png</file>
+		<file>64x64\bush_big.png</file>
+		<file>64x64\explosion1.png</file>
+		<file>64x64\explosion2.png</file>
+		<file>64x64\explosion3.png</file>
+		<file>64x64\explosion4.png</file>
+		<file>64x64\rubber_wall.png</file>
+	</tilemap>
+</tilemaps>
