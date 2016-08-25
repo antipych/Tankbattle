@@ -9,7 +9,7 @@ public class Tank : MonoBehaviour
     public float MoveSpeed = 1f;
     public float TurnSpeed = 90f;
 
-    float Health = 3f;
+    public float Health = 100f;
     public float Fuel = 100f;
     public float Scores = 0f;
     public bool isGem = false;
@@ -132,10 +132,18 @@ public class Tank : MonoBehaviour
 
         if (heading<1)
         {
-            Health = 3f;
+            Health = 100f;
             Fuel = 100f;
             Shells = 10;
         }
+
+        if (Health <= 0)
+        {
+            Respawn();
+        }
+
+        SetTexts();
+
     }
 
     //Called when the Trigger entered
@@ -154,7 +162,7 @@ public class Tank : MonoBehaviour
                 Respawn();
             }
 
-            SetTexts();
+            
         }
 
         if (other.tag == "GemFree")
@@ -192,7 +200,7 @@ public class Tank : MonoBehaviour
         transform.position = start;
         transform.rotation = startRotation;
 
-        Health = 3f;
+        Health = 100f;
         Fuel = 100f;
         Shells = 10;
 
@@ -208,7 +216,7 @@ public class Tank : MonoBehaviour
 
         if (LivesText == null)
             return;
-        LivesText.text = "Lives: " + Lives.ToString() + "  Health: " + (33 * Health + 1).ToString() + "%" +
+        LivesText.text = "Lives: " + Lives.ToString() + "  Health: " + (Health).ToString("###") + "%" +
             "  Fuel: " + Fuel.ToString("F00") + 
             "  Shells: " + Shells.ToString("F00") + 
             "  Scores: " + Scores.ToString("F00"); // +" Gem:"+GemText;
