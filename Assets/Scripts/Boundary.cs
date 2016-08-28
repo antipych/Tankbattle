@@ -7,7 +7,7 @@ public class Boundary : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         //Excute if the object tag was equal to one of these
-        if (other.tag == "TankShell" || other.tag == "EnemyShell")
+        if (other.tag == "TankShell" || other.tag == "EnemyShell" || other.tag == "Ball")
         {
             Destroy(other.gameObject);
         }

@@ -8,6 +8,8 @@ public class Shell : MonoBehaviour {
 
     public GameObject explosion;
 
+
+
     // Use this for initialization
     void Start () {
 	
@@ -22,4 +24,8 @@ public class Shell : MonoBehaviour {
     {
         Instantiate(explosion, gameObject.transform.position, transform.rotation);
     }
+
+
+
+
 }

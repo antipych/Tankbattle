@@ -27,7 +27,7 @@ public class BlockBlue : MonoBehaviour {
     {
         //Debug.Log(" OnTriggerEnter2D  ");
         //
-        if (!theColl.isTrigger && (other.tag == "TankShell" || other.tag == "EnemyShell"))
+        if (!theColl.isTrigger && (other.tag == "TankShell" || other.tag == "EnemyShell" || other.tag == "Ball"))
         { 
             Instantiate(Crater, other.gameObject.transform.position, transform.rotation);
             Destroy(other.gameObject);

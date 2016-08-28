@@ -156,13 +156,16 @@ public class Tank : MonoBehaviour
             Health -= shell.Power;
 
             Destroy(other.gameObject);
+   
+        }
 
-            if (Health <= 0)
-            {
-                Respawn();
-            }
+        if (other.tag == "Ball")
+        {
+            var shell = other.gameObject.GetComponent<Ball>();
+            Health -= shell.Power;
 
-            
+            Destroy(other.gameObject);
+
         }
 
         if (other.tag == "GemFree")
@@ -175,6 +178,8 @@ public class Tank : MonoBehaviour
 
             SetTexts();
         }
+
+
     }
 
     private void Respawn()

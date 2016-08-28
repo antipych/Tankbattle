@@ -22,7 +22,7 @@ public class Gem : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         //Excute if the object tag was equal to one of these
-        if (other.tag == "TankShell" || other.tag == "EnemyShell")
+        if (other.tag == "TankShell" || other.tag == "EnemyShell" || other.tag == "Ball")
         {
             Destroy(other.gameObject);
 
@@ -38,7 +38,11 @@ public class Gem : MonoBehaviour {
 
 
             Destroy(gameObject);
-            GameObject.Find("Tank").GetComponent<Tank>().Scores += 100;
+
+            if (other.tag != "Ball")
+            {
+                GameObject.Find("Tank").GetComponent<Tank>().Scores += 100;
+            }
         }
     }
 }

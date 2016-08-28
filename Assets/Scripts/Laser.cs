@@ -54,11 +54,15 @@ public class Laser : MonoBehaviour {
         if (other.tag == "TankShell")
         {
             Destroy(other.gameObject);
-
-
             Destroy(gameObject);
 
             GameObject.Find("Tank").GetComponent<Tank>().Scores += 100;
+        }
+
+        if (other.tag == "Ball")
+        {
+            Destroy(gameObject);
+            Destroy(other.gameObject);
         }
     }
 }

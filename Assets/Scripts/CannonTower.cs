@@ -52,5 +52,15 @@ public class CannonTower : MonoBehaviour
 
             GameObject.Find("Tank").GetComponent<Tank>().Scores += 100;
         }
+
+        if (other.tag == "Ball")
+        {
+            Destroy(gameObject);
+            PitVector = transform.position;
+            PitVector.z = 1;
+            var q = Instantiate(Wreck, PitVector, transform.rotation) as GameObject;
+            q.transform.parent = gameObject.transform.parent;
+            Destroy(other.gameObject);
+        }
     }
 }

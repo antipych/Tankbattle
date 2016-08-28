@@ -48,5 +48,11 @@ public class Cannon : MonoBehaviour {
 
             GameObject.Find("Tank").GetComponent<Tank>().Scores += 100;
         }
+
+        if (other.tag == "Ball")
+        {
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+        }
     }
 }
