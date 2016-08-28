@@ -27,27 +27,19 @@ public class RubberWall : MonoBehaviour
             {
                 Destroy(other.gameObject);
             }
-            print(other.tag);
+           // print(other.tag);
 
 
-            //other.transform.Rotate(Vector3.forward, 90f);
-            //other.transform.Rotate(Vector3.forward, Mathf.Atan2(other.transform.position.x, other.transform.position.y));
+
             var dir = other.transform.position - transform.position;
             var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            other.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward); 
-                //Vector3.Reflect(other.transform.position, other.transform.position);
-            //other.transform.
+            other.transform.rotation = Quaternion.AngleAxis(angle+180, Vector3.forward); 
+
         }
 
     }
 
-    //void OnCollisionEnter2D(Collision2D other)
-    //{
-    //    print("Points colliding: " + other.contacts.Length);
-    //    print("First normal of the point that collide: " + other.contacts[0].normal);
 
-    //    other.transform.position = Vector3.Reflect(other.transform.position, other.contacts[0].normal);
-    //}
 
 
 

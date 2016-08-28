@@ -126,8 +126,12 @@ public class Tank : MonoBehaviour
         if (heading<1 && isGem)
         {
             //TODO Congratulations
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            //TODO Check last scene and start first
+            if (SceneManager.sceneCount < SceneManager.GetActiveScene().buildIndex + 1)
+            {
+                SceneManager.LoadScene(0);
+            }
+            else  SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            
         }
 
         if (heading<1)
