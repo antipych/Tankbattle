@@ -51,18 +51,15 @@ public class Laser : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         //Excute if the object tag was equal to one of these
-        if (other.tag == "TankShell")
+        if (other.tag == "TankShell" || other.tag == "EnemyShell" || other.tag == "Ball")
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
-
-            GameObject.Find("Tank").GetComponent<Tank>().Scores += 100;
+            if (other.tag == "TankShell")
+            {
+                GameObject.Find("Tank").GetComponent<Tank>().Scores += 100;
+            }
         }
 
-        if (other.tag == "Ball")
-        {
-            Destroy(gameObject);
-            Destroy(other.gameObject);
-        }
     }
 }

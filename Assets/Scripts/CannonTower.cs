@@ -53,7 +53,7 @@ public class CannonTower : MonoBehaviour
             GameObject.Find("Tank").GetComponent<Tank>().Scores += 100;
         }
 
-        if (other.tag == "Ball")
+        if (other.tag == "Ball" || other.tag == "EnemyShell")
         {
             Destroy(gameObject);
             PitVector = transform.position;

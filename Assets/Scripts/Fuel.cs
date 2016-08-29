@@ -17,7 +17,7 @@ public class Fuel : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         //Excute if the object tag was not equal to one of these
-        if (other.tag != "TankShell" && other.tag != "EnemyShell")
+        if (other.tag != "TankShell" && other.tag != "EnemyShell" && other.tag != "Ball")
         {
             GameObject.Find("Tank").GetComponent<Tank>().Fuel = 100;
             Destroy(gameObject);

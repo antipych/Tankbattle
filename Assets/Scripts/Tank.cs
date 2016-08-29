@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 
 public class Tank : MonoBehaviour
 {
@@ -116,30 +116,32 @@ public class Tank : MonoBehaviour
                 nextFire = Time.time + fireRate;
                 var q = Instantiate(shell, shotSpawn.position, shotSpawn.rotation) as GameObject;
                 q.tag = "TankShell";
-                //--Shells;
+                --Shells;
                 SetTexts();
             }
         }
 
         heading = (start - transform.position).magnitude;
 
-        if (heading<1 && isGem)
-        {
-            //TODO Congratulations
-            if (SceneManager.sceneCount < SceneManager.GetActiveScene().buildIndex + 1)
-            {
-                SceneManager.LoadScene(0);
-            }
-            else  SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //Теперь есть бункер для приноса кристалла!!!
+        //if (heading<1 && isGem)
+        //{
+        //    //TODO Congratulations
+        //    if (SceneManager.sceneCount < SceneManager.GetActiveScene().buildIndex + 1)
+        //    {
+        //        SceneManager.LoadScene(0);
+        //    }
+        //    else  SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             
-        }
+        //}
 
-        if (heading<1)
-        {
-            Health = 100f;
-            Fuel = 100f;
-            Shells = 10;
-        }
+        //Теперь есть бункер для зарядки!!!
+        //if (heading<1)
+        //{
+        //    Health = 100f;
+        //    Fuel = 100f;
+        //    Shells = 10;
+        //}
 
         if (Health <= 0)
         {
