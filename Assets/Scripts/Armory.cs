@@ -19,11 +19,10 @@ public class Armory : MonoBehaviour {
     {
          if (other.gameObject.GetComponent<Tank>() != null)
             {
-            other.gameObject.GetComponent<Tank>().Health = 100f;
-            other.gameObject.GetComponent<Tank>().Fuel = 100f;
-            other.gameObject.GetComponent<Tank>().Shells = 10;
-
-        }
+                other.gameObject.GetComponent<Tank>().Health = 100f;
+                other.gameObject.GetComponent<Tank>().Fuel = 100f;
+                other.gameObject.GetComponent<Tank>().Shells = 10;
+            }
 
         if (other.gameObject.GetComponent<Tank>().isGem)
         {
