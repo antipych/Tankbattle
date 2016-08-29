@@ -116,7 +116,7 @@ public class Tank : MonoBehaviour
                 nextFire = Time.time + fireRate;
                 var q = Instantiate(shell, shotSpawn.position, shotSpawn.rotation) as GameObject;
                 q.tag = "TankShell";
-                --Shells;
+                //--Shells;
                 SetTexts();
             }
         }
@@ -154,7 +154,7 @@ public class Tank : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //Excute if the object tag was equal to one of these
-        if (other.tag == "EnemyShell")
+        if (other.tag == "EnemyShell" || other.tag == "TankShell")
         {
             var shell = other.gameObject.GetComponent<Shell>();
             Health -= shell.Power;
