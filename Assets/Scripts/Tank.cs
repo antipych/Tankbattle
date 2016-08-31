@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 
 public class Tank : MonoBehaviour
 {
@@ -38,6 +38,11 @@ public class Tank : MonoBehaviour
 
     public float heading;
 
+    bool ShowGameOver = false;
+
+    float move;
+    float rotate;
+
     public bool isInDock { get {
             return heading < 1;
     } }
@@ -59,67 +64,46 @@ public class Tank : MonoBehaviour
         rig  = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
+        Time.timeScale = 1;
+
         SetTexts();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float move = Input.GetAxis("Vertical");
-        float rotate = Input.GetAxis("Horizontal");
+        if (Input.GetKeyDown("up") == true)
+            //if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
+            move = 1;
+        if (Input.GetKeyUp("up") == true)
+            move = 0;
+        if (Input.GetKeyDown("down") == true)
+            //if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
+            move = -1;
+        if (Input.GetKeyUp("down") == true)
+            move = 0;
+        //if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f)
+        //    rotate = Input.GetAxis("Horizontal");
+        if (Input.GetKeyDown("left") == true)
+            //if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
+            rotate = -1;
+        if (Input.GetKeyUp("left") == true)
+            rotate = 0;
+        if (Input.GetKeyDown("right") == true)
+            //if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
+            rotate = 1;
+        if (Input.GetKeyUp("right") == true)
+            rotate = 0;
 
-        if (Mathf.Abs(rotate) > 0.1f)
-        {
-            // TODO: другая анимация
-            anim.SetBool("Move", true);
-
-            if (rotate > 0)
-            {
-                transform.Rotate(Vector3.forward, -TurnSpeed * Time.deltaTime);
-            }
-            else
-            {
-                transform.Rotate(Vector3.forward, TurnSpeed * Time.deltaTime);
-            }
-        }
+        Move(move);
+        Rotate(rotate);
+        Fire(Input.GetAxis("Fire1") > 0);
 
 
-        if (Mathf.Abs(move) > 0.1f)
-        {
-            anim.SetBool("Move", true);
-            Fuel= Fuel - MoveSpeed * Time.deltaTime;
-            SetTexts();
-            if (Fuel <= 0)
-            {
-                Respawn();
-            }
 
-            if (move > 0)
-            {
-                transform.Translate(Vector3.up * MoveSpeed * Time.deltaTime);
-            }
-            else
-            {
-                transform.Translate(Vector3.down * MoveSpeed * Time.deltaTime);
-            }
-        }
-        else
-        {
-            anim.SetBool("Move", false);
-            rig.velocity = Vector2.zero;
-        }
 
-        if (Time.time > nextFire && Input.GetAxis("Fire1") > 0 && !isInDock)
-        {
-            if (Shells > 0)
-            {
-                nextFire = Time.time + fireRate;
-                var q = Instantiate(shell, shotSpawn.position, shotSpawn.rotation) as GameObject;
-                q.tag = "TankShell";
-                --Shells;
-                SetTexts();
-            }
-        }
+
+
 
         heading = (start - transform.position).magnitude;
 
@@ -144,6 +128,11 @@ public class Tank : MonoBehaviour
         //}
 
         if (Health <= 0)
+        {
+            Respawn();
+        }
+
+        if (Fuel <= 0)
         {
             Respawn();
         }
@@ -182,7 +171,6 @@ public class Tank : MonoBehaviour
 
             Scores += 100;
 
-            SetTexts();
         }
 
 
@@ -191,6 +179,9 @@ public class Tank : MonoBehaviour
     private void Respawn()
     {
         --Lives;
+
+        if (Lives < 1) ShowGameOver = true;
+
         PitVector = transform.position;
 
         if (isGem==true) {
@@ -215,8 +206,7 @@ public class Tank : MonoBehaviour
         Fuel = 100f;
         Shells = 10;
 
-        SetTexts();
-        //if()
+
     }
 
     void SetTexts()
@@ -227,11 +217,105 @@ public class Tank : MonoBehaviour
 
         if (LivesText == null)
             return;
-        LivesText.text = "Lives: " + Lives.ToString() + "  Health: " + (Health).ToString("###") + "%" +
-            "  Fuel: " + Fuel.ToString("F00") + 
-            "  Shells: " + Shells.ToString("F00") + 
-            "  Scores: " + Scores.ToString("F00"); // +" Gem:"+GemText;
+        LivesText.text = 
+            "Lives: " + Lives.ToString() + 
+            "\nHealth: " + (Health).ToString("###") + "%" +
+            "\nFuel: " + Fuel.ToString("F00") +
+            "\nShells: " + Shells.ToString("F00") +
+            "\nScores: " + Scores.ToString("F00"); // +" Gem:"+GemText;
 
         //Debug.Log(isGem);
+    }
+
+    void OnGUI()
+    {
+
+        if (ShowGameOver)
+        {
+
+            // GUILayout.Box("Congratulations! You Win!");
+            //GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2, 200, 60), "Congratulations!You Win!");
+            Time.timeScale = 0;
+            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2, 200, 60), "Game Over! \n Press to Continue..."))
+            {
+
+                    Time.timeScale = 1; 
+                    Scores = 0;
+                    SceneManager.LoadScene(0);
+
+            }
+
+
+
+        }
+
+    }
+
+    public void SetMove(float movedirection)
+    {
+        move = movedirection;
+    }
+    void Move(float movedirection)
+    {
+        if (Mathf.Abs(movedirection) > 0.1f)
+        {
+            anim.SetBool("Move", true);
+            Fuel = Fuel - MoveSpeed * Time.deltaTime;
+     
+
+
+            if (movedirection > 0)
+            {
+                transform.Translate(Vector3.up * MoveSpeed * Time.deltaTime);
+            }
+            else
+            {
+                transform.Translate(Vector3.down * MoveSpeed * Time.deltaTime);
+            }
+        }
+        else
+        {
+            anim.SetBool("Move", false);
+            rig.velocity = Vector2.zero;
+        }
+    }
+
+    public void SetRotate(float rotatedirection)
+    {
+        rotate = rotatedirection;
+    }
+    void Rotate(float rotatedirection)
+    {
+        if (Mathf.Abs(rotatedirection) > 0.1f)
+        {
+            // TODO: другая анимация
+            anim.SetBool("Move", true);
+
+            if (rotatedirection > 0)
+            {
+                transform.Rotate(Vector3.forward, -TurnSpeed * Time.deltaTime);
+            }
+            else
+            {
+                transform.Rotate(Vector3.forward, TurnSpeed * Time.deltaTime);
+            }
+        }
+
+    }
+
+    public void Fire(bool InputFire)
+    {
+        if (Time.time > nextFire && InputFire && !isInDock)
+        {
+            if (Shells > 0)
+            {
+                nextFire = Time.time + fireRate;
+                var q = Instantiate(shell, shotSpawn.position, shotSpawn.rotation) as GameObject;
+                q.tag = "TankShell";
+                --Shells;
+
+            }
+        }
+
     }
 }

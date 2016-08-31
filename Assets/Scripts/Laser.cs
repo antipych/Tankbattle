@@ -13,12 +13,14 @@ public class Laser : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+
         lineRenderer = gameObject.AddComponent<LineRenderer>();
         lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
         lineRenderer.SetColors(c1, c2);
         lineRenderer.SetWidth(.1f, .1f);
         lineRenderer.SetVertexCount(2);
-        
+
     }
 
 

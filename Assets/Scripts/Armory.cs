@@ -4,8 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class Armory : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    bool ShowThisGUI = false;
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -26,12 +28,33 @@ public class Armory : MonoBehaviour {
 
         if (other.gameObject.GetComponent<Tank>().isGem)
         {
-            //TODO Congratulations
-            if (SceneManager.sceneCount < SceneManager.GetActiveScene().buildIndex + 1)
+            ShowThisGUI = true;
+
+        }
+
+    }
+
+    
+
+    void OnGUI()
+    {
+
+        if (ShowThisGUI)
+        {
+
+            // GUILayout.Box("Congratulations! You Win!");
+            //GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2, 200, 60), "Congratulations!You Win!");
+            Time.timeScale = 0;
+            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2, 200, 60), "Congratulations!You Win! \n Press to Continue..."))
             {
-                SceneManager.LoadScene(0);
+                Time.timeScale = 1;
+                if (SceneManager.sceneCount < SceneManager.GetActiveScene().buildIndex + 1)
+                {
+                    SceneManager.LoadScene(0);
+                }
+                else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             }
-            else SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            
 
         }
 
